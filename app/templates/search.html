@@ -1,0 +1,59 @@
+
+
+
+{% extends "base.html" %}
+{% block content %}
+    
+
+
+
+
+
+
+
+
+            <div>
+                <ul>
+                    <li> Search :
+                        <b>{{songName}}</b>
+                    </li>
+
+                    <li>
+                       Results :
+                        <b>{{songsNumber}}</b>
+                    </li>
+                </ul>
+            </div>
+
+        <div>
+            <div>
+
+                {% if songs %}
+                <table>
+                    <tr >
+                        <th>Band</th>
+                        <th>Song</th>
+                    </tr>
+
+                    {% for song in songs %}
+                    <tr >
+                        <td>{{song.Singer}}</td>
+                        <td><a href="{{ song.index}}">
+                                {{song.Song}}
+                        </a>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <h1 class="w3-text-pink">
+                    No Results
+                </h1>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

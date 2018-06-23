@@ -1,0 +1,29 @@
+ {% extends 'base.html' %} {% block content %}
+
+
+
+<div>
+    <ul>
+        <li>Band :
+            <b>{{Band}}</b>
+        </li>
+
+        <li>
+            Song :
+            <b>{{Song}}</b>
+        </li>
+    </ul>
+</div>
+
+
+
+<div>
+    <div>
+        <p>
+            {% print(lyrics)|safe %}
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

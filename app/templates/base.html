@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My lyrics</title>
+</head>
+<body>
+    
+    <form action="/search" method="GET" class="form1">
+        <div style="" class="w3-bar ">
+            <input required="required"name="song" placeholder="Search for song ..." >
+            <button onclick="document.getElementsByClassName('form1').submit()" 
+         >Search
+            </button>
+        </div>
+    </form>
+
+    {% if error %}
+    <div >
+        <p>
+            
+            <b>{{error.first}}</b>
+            {{error.second}}
+        </p>
+    </div>
+    {% endif %}
+
+    <br/> {% block content %} {% endblock %}
+
+
+</body>
+</html>
