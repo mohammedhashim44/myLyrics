@@ -1,26 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My lyrics</title>
+    <title>My Lyrics </title>
+    <link rel="stylesheet" type="text/css" href="../static/css/w3css.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/w3 blue grey theme.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/w3 metro themes.css" />
+    <link href="https://fonts.googleapis.com/css?family=Tangerine:700" rel="stylesheet">
+
+    <script>
+
+        function toggle(id) {
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-hide") == -1) {
+                x.className = x.className + "w3-hide";
+            }
+            else {
+                x.className = x.className.replace("w3-hide", "");
+            }
+        }
+
+        function getWidth() {
+            var w = window, d = document, e = d.documentElement, g = d.getElementsByTagName('body')[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight || e.clientHeight || g.clientHeight;
+            alert(x);
+        }
+
+
+    </script>
+
+    <style>
+        .w3-tangarine {
+            color: white;
+            font-family: 'Tangerine', cursive;
+            font-size: 70px;
+        }
+
+
+        .w3-tangarine-mobile {
+            color: white;
+            font-family: 'Tangerine', cursive;
+
+            font-size: 85px;
+        }
+
+        .body {
+            background-color: rgb(36, 36, 66);
+        }
+
+        .input-round {
+            border-radius: 20px 0px 0px 20px;
+        }
+
+        .icon-round {
+            border-radius: 0px 20px 20px 2px;
+
+        }
+
+        .icon {
+            background-color: #e91e63;
+        }
+
+        #header {
+            background-color: rgb(36, 26, 63)
+        }
+
+        #content,
+        body {
+            background-color: rgb(45, 33, 80)
+        }
+
+        .sub-content {
+            background-color: rgb(255, 255, 255)
+        }
+
+        .first {
+            color: #e91e63;
+            font-weight: bold;
+            border-bottom: 2px solid;
+        }
+
+
+        @media screen and (max-width: 590px) {
+            .hide-mobile {
+                display: none;
+            }
+
+        }
+
+
+        @media screen and (min-width: 590px) {
+            .show-mobile {
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
-    <form action="/search" method="GET" class="form1">
-        <div style="" class="w3-bar ">
-            <input required="required"name="song" placeholder="Search for song ..." >
-            <button onclick="document.getElementsByClassName('form1').submit()" 
-         >Search
-            </button>
+    <div style="" class="">
+        <div id="header" style="height: 200px;" class=" 
+        w3-container  mobile-large hide-mobile
+    w3-display-container">
+
+            <h1 class="w3-display-topmiddle  w3-tangarine 
+        w3-margin-top
+      " style="
+       ">
+                My Lyrics
+            </h1>
+
+            <div class="w3-row w3-container w3-display-bottommiddle">
+                <div class="w3-col m2 l3">
+                    <br/>
+                </div>
+
+
+                <div class="w3-center 
+                w3-col w3-large">
+                    <form action="/search" method="GET" class="form1">
+                        <div style="" class="w3-bar ">
+                            <input required="required" style="width: 80%" name="song" placeholder="Search for song ..." class="w3-input input-round
+                       w3-bar-item">
+                            <button onclick="document.getElementsByClassName('form1').submit()" 
+                            class="icon-round icon but
+                       w3-button
+                       w3-bar-item">
+                                <i class="fa fa-search">
+
+                                </i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="w3-col m2 l3">
+
+                    <br/>
+                </div>
+
+            </div>
+
         </div>
-    </form>
+
+
+        <div id="header" style="height: 350px;" class=" 
+        w3-container show-mobile mobile
+    w3-display-container">
+
+            <h1 class="w3-display-topmiddle w3-center
+            w3-tangarine-mobile 
+        w3-margin-top
+      " style="
+       ">
+                My Lyrics
+            </h1>
+
+
+
+            <div style="margin-bottom: 7px" class="w3-center w3-padding
+             w3-display-bottommiddle 
+                w3-col w3-large">
+                <form action="/search" method="GET" class="form2">
+                    <div style="" class="w3-bar ">
+                        <input required="required" style="width: 80%" name="song" placeholder="Search for song ..." class="w3-input input-round
+                       w3-bar-item">
+                        <button onclick="document.getElementsByClassName('form2').submit()" 
+                        class="icon-round icon but
+                       w3-button
+                       w3-bar-item">
+                            <i class="fa fa-search">
+
+                            </i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
 
     {% if error %}
-    <div >
+    <div style="width: 50% ; margin:5px auto ;
+    padding: 2px ;" class="w3-card-4 w3-round-large w3-white w3-margin-top
+      w3-center ">
         <p>
-            
+            <span style="margin-right: 5px" class="w3-text-metro-red">
+                <i class="
+                fa fa-exclamation-triangle"></i>
+            </span>
             <b>{{error.first}}</b>
             {{error.second}}
         </p>
@@ -29,6 +204,6 @@
 
     <br/> {% block content %} {% endblock %}
 
-
 </body>
+
 </html>

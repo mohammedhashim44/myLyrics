@@ -10,33 +10,121 @@
 
 
 
+        
+    <div id="content" style="max-width: 900px;margin: 10px auto" class="w3-row-padding  ">
+
+        <div class="w3-third  w3-margin-top">
 
 
-            <div>
-                <ul>
-                    <li> Search :
+            <div class="w3-container w3-large sub-content w3-padding
+       w3-card-4">
+                <ul class="w3-ul padd">
+                    <li>
+                        <span style="margin-right: 5px">
+                            <i class="w3-text-pink
+                   fa fa-search">
+
+                            </i>
+                        </span> Search :
                         <b>{{songName}}</b>
                     </li>
 
                     <li>
-                       Results :
+                        <span style="margin-right: 5px" class="margin">
+                            <i class="w3-text-pink
+                        fa fa-list">
+
+                            </i>
+                        </span> Results :
                         <b>{{songsNumber}}</b>
                     </li>
+
+
                 </ul>
             </div>
 
-        <div>
-            <div>
+            <div class="w3-container sub-content 
+        w3-padding w3-card-4 w3-margin-top
+      ">
+
+                <div class="w3-large w3-margin-bottom">
+
+                    <div class="margin">
+                        <span style="margin-right: 5px" class="w3-text-pink">
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                        <b>Change colour</b>
+                        <span onclick="toggle('colours')" class="w3-margin-left
+                            
+                            w3-button">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+
+                    </div>
+
+                    <div id="colours" class="w3-bar-block w3-hide w3-margin-top
+                    w3-margin-bottom  ">
+
+                        <a class="w3-metro-magenta w3-hover-opacity
+                   w3-bar-item w3-button w3-center">
+                            Magenta
+                        </a>
+
+                        <a class="w3-metro-light-purple w3-hover-opacity
+                   w3-bar-item w3-button w3-center">
+                            Light Purple
+                        </a>
+                        <a class="w3-metro-purple w3-hover-opacity
+                   w3-bar-item w3-button w3-center">
+                            Purple
+                        </a>
+
+                        <a class="w3-metro-dark-blue w3-hover-opacity
+                   w3-bar-item w3-button w3-center">
+                            Blue Dark
+                        </a>
+
+                        <a class="w3-metro-blue w3-hover-opacity
+                   w3-bar-item w3-button w3-center">
+                            Blue
+                        </a>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="w3-twothird 
+    w3-margin-top">
+            <div class="w3-card-4 sub-content w3-round-xlarge
+       w3-container w3-large
+        w3-center">
 
                 {% if songs %}
-                <table>
-                    <tr >
-                        <th>Band</th>
-                        <th>Song</th>
+                <table class="w3-table" >
+                    <tr class="first">
+                        <th><i style="margin-right: 7px"
+                            class="fa fa-asterisk margin
+                            ">
+
+                        </i>Band</th>
+                        <th><i style="margin-right: 7px"
+                            class="fa fa-headphones margin
+                            ">
+
+                        </i>Song</th>
                     </tr>
 
                     {% for song in songs %}
-                    <tr >
+                    <tr class="w3-border-bottom">
                         <td>{{song.Singer}}</td>
                         <td><a href="{{ song.index}}">
                                 {{song.Song}}
