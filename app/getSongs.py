@@ -46,19 +46,19 @@ class Lyrics():
             return
 
         # cut table from the page
-        begin = searchPage.find('<!--output-->')
-        end = searchPage.find('<!--/output-->')
+        begin = searchPage.find('<div class="lm-section-list">')
+        end = searchPage.find('TODO inline styles')
 
         songs = []
         # check begin and end
         if begin != -1 and end != -1:
 
-            lyrics = searchPage[begin : end + len('<!--/output-->')]
+            lyrics = searchPage[begin : end ]
             soup = BeautifulSoup(lyrics , 'html.parser')
             
 
-            tr = soup.find_all('tr')
-            for i in range(len(tr) - 1):
+            tr = soup.findAll("div", {"class": "lm-list__row"})
+            for i in range(len(tr) ):
 
                 soup2 = BeautifulSoup(str(tr[i]) , 'html.parser')
                 a = soup2.find_all('a')
@@ -117,7 +117,7 @@ class Lyrics():
             soup = BeautifulSoup(html , 'html.parser')
             p = soup.find('p' , id="lyrics_text")
 
-            self.lyricsHtml = str(p)
+            self.lyricsHtml = str(p).strip()
             return 
 
         else:
@@ -139,8 +139,6 @@ class Lyrics():
         p = soup.find('p' , id="lyrics_text")
 
         self.lyrics = p.text
-
-
 
         
     def run(self):
