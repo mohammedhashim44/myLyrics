@@ -47,7 +47,7 @@ class Lyrics():
 
         # cut table from the page
         begin = searchPage.find('<div class="lm-section-list">')
-        end = searchPage.find('TODO inline styles')
+        end = searchPage.find('lm-pagination')
 
         songs = []
         # check begin and end
