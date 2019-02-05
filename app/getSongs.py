@@ -115,9 +115,9 @@ class Lyrics():
             
             html = lyrics_request.text
             soup = BeautifulSoup(html , 'html.parser')
-            p = soup.find('p' , id="lyrics_text")
+            div = soup.find('div' , id="lyrics_text")
 
-            self.lyricsHtml = str(p).strip()
+            self.lyricsHtml = str(div).strip()
             return 
 
         else:
@@ -136,9 +136,9 @@ class Lyrics():
         lyrics = ""
 
         soup = BeautifulSoup(text , 'html.parser')
-        p = soup.find('p' , id="lyrics_text")
+        div = soup.find('div' , id="lyrics_text")
 
-        self.lyrics = p.text
+        self.lyrics = div.text.strip()
 
         
     def run(self):
@@ -159,8 +159,8 @@ class Lyrics():
                 k = 0
                 for i in self.songsTable :
                     k += 1
-                    print(" No."+str(k)+" || Singer : " + i['Singer']
-                             + " || Song : " + i['Song'])
+                    print(" No."+str(k)+" || Singer : " + i['Singer'].strip()
+                             + " || Song : " + i['Song'].strip())
                 number = input(">> Choose number or -1 to exit : ")
                 number = int(number)
                 if number == -1:
@@ -169,10 +169,10 @@ class Lyrics():
                     print(">> No such Number !! please read carefully .. \n")
                     print("\n"*20)
                 else:
-                    print("\n\n" + "*"*10)
+                    print("\n\n" + "*"*30)
 
-                    print(" No."+str(number)+" || Singer : " + self.songsTable[number - 1]['Singer']
-                             + " || Song : " + self.songsTable[number - 1]['Song'])
+                    print(" No."+str(number)+" || Singer : " + self.songsTable[number - 1]['Singer'].strip()
+                             + " || Song : " + self.songsTable[number - 1]['Song'].strip() )
 
 
                     self.getLyricsPageContent(number-1)
