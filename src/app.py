@@ -5,19 +5,25 @@ import json
 app = Flask(__name__)
 
 
+def is_empty_or_null(text):
+    if text == "" or text is None:
+        return True
+    return False
+
+
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
 
-@app.route('/search', methods=['GET'])
-def search():
+@app.route('/search_page', methods=['GET'])
+def search_page():
     song = request.args.get('song')
-    if song == "" or song is None:
+    if is_empty_or_null(song):
         err = {'first': 'Empty search', 'second': '..try again.'}
         return render_template('index.html', error=err)
     try:
-        search_result = search_song(song)
+        search_result = search_song_in_website(song)
         return render_template('search.html', songName=song, songsNumber=len(search_result.songs),
                                songs=search_result.songs)
     except Exception as e:
@@ -29,7 +35,7 @@ def search():
 @app.route('/get', methods=['GET'])
 def get():
     link = request.args.get('link')
-    if link is None or link.strip() == "":
+    if is_empty_or_null(link):
         error = {'first': 'Empty Link', 'second': ' .. try again'}
         return render_template('index.html', error=error)
 
@@ -45,7 +51,7 @@ def get():
         return render_template('index.html', error=err)
 
 
-@app.route('/api/search', methods=['GET'])
+@app.route('/api/search_api', methods=['GET'])
 def search_api():
     song = request.args.get('song')
     if song == "" or song is None:
@@ -53,7 +59,7 @@ def search_api():
         return response
 
     try:
-        search_result = search_song(song)
+        search_result = search_song_in_website(song)
         songs_dict = []
         for s in search_result.songs:
             songs_dict.append(s.to_dict())

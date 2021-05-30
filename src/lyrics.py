@@ -13,7 +13,7 @@ def construct_search_url(search_string):
     return SEARCH_URL + search_string
 
 
-def search_song(searched_song_string):
+def search_song_in_website(searched_song_string):
     """Return SearchResult Object"""
     searched_song_string = searched_song_string.strip()
     if searched_song_string == "":

@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from lyrics import  *
+from lyrics import *
 
 if __name__ == "__main__":
     running = True
@@ -13,13 +13,13 @@ if __name__ == "__main__":
         searched_song = searched_song.strip()
         print(">>> Connecting ...")
 
-        result = search_song(searched_song)
+        result = search_song_in_website(searched_song)
         count = len(result.songs)
-        if count > 0 :
+        if count > 0:
             print(">> This is what we found :\n")
             for i in range(count):
                 song = result.songs[i]
-                msg = '{0}: {1} - {2}'.format((i + 1),song.song_name,song.singer)
+                msg = '{0}: {1} - {2}'.format((i + 1), song.song_name, song.singer)
                 print(msg)
 
             number = input(">> Choose number or -1 to exit : ")
@@ -32,7 +32,7 @@ if __name__ == "__main__":
             else:
                 print("\n\n" + "*" * 30)
                 song = result.songs[number - 1]
-                msg = '{0}: {1} - {2}'.format((i + 1),song.song_name,song.singer)
+                msg = '{0}: {1} - {2}'.format(number, song.song_name, song.singer)
                 print(msg)
                 print(">>> Connecting ...")
 
