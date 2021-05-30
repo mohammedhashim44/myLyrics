@@ -32,8 +32,8 @@ def search_page():
         return render_template('index.html', error=error)
 
 
-@app.route('/get', methods=['GET'])
-def get():
+@app.route('/get_song_from_link', methods=['GET'])
+def get_song_from_link():
     link = request.args.get('link')
     if is_empty_or_null(link):
         error = {'first': 'Empty Link', 'second': ' .. try again'}

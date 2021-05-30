@@ -68,7 +68,7 @@
                     {% for song in songs %}
                     <tr class="w3-border-bottom">
                         <td>{{song.singer}}</td>
-                        <td><a href="{{ url_for('get',link=song.link ) }}">
+                        <td><a href="{{ url_for('get_song_from_link',link=song.link ) }}">
                                 {{song.song_name}}
                         </a>
                             </td>
