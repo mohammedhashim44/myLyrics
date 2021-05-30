@@ -125,9 +125,9 @@
 
                     {% for song in songs %}
                     <tr class="w3-border-bottom">
-                        <td>{{song.Singer}}</td>
-                        <td><a href="{{ song.index}}">
-                                {{song.Song}}
+                        <td>{{song.singer}}</td>
+                        <td><a href="{{ url_for('get',link=song.link ) }}">
+                                {{song.song_name}}
                         </a>
                             </td>
                     </tr>

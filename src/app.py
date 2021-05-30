@@ -1,15 +1,10 @@
-from flask import Flask, render_template, request , redirect , url_for 
-from getSongs import Lyrics
-
-lyrics = Lyrics()
+from flask import Flask, render_template, request , redirect , url_for
+from lyrics import *
 
 app = Flask(__name__)
 
-songs = {}
-
-@app.route('/' ,methods=['GET']) 
+@app.route('/' ,methods=['GET'])
 def home():
-    lyrics.error = {}
     return render_template('index.html')
 
 
@@ -17,56 +12,46 @@ def home():
 def search():
 
     song = request.args.get('song')
-    if song == "" or song == None:
+    if song == "" or song is None:
         err = {'first':'Empty search' , 'second':'..try again.'}
         return render_template('index.html',error=err)
 
     try:
-        lyrics.error = {}
-        lyrics.getSongsTable(song)
-        if len(lyrics.error) != 0 :
-            return render_template('index.html',error=lyrics.error)
-        
-        global songs
-        songs = lyrics.songsTable 
-        number_of_songs = len(songs) 
-
-        
-        for index in range(len(songs)):
-            songs[index]['index'] = "get/" + str(index) 
-        return render_template('search.html' ,
-                                    songName=lyrics.song ,
-                                    songsNumber=number_of_songs,
-                                    songs=songs)
-        
-    
-    except:
+        search_result = search_song(song)
+        return render_template(
+            'search.html',
+            songName=song,
+            songsNumber=len(search_result.songs),
+            songs = search_result.songs
+        )
+    except Exception as e:
+        print(e)
         error = {'first':'Connection error' , 'second':' .. try again'}
         return render_template('index.html',error=error)
 
 
-@app.route('/get/<int:index>',methods=['GET'])
-def get(index):
+@app.route('/get',methods=['GET'])
+def get():
+    link = request.args.get('link')
+
+    if link is None or link.strip() == "":
+        error = {'first': 'Empty Link', 'second': ' .. try again'}
+        return render_template('index.html', error=error)
+
     try:
-        if len(lyrics.songsTable) == 0 :
-            err = {'first':'Empty search' , 'second':'..try again.'}
-            return render_template('index.html',error=err)
+        link = link.strip()
+        song_lyrics = get_lyrics_from_link(link)
+        lyrics_text = song_lyrics.lyrics
+        lyrics_text = lyrics_text.replace("\n" , "<br/>")
+        return render_template('lyricsPage.html',
+                               Band=song_lyrics.song_title,
+                               Song=song_lyrics.song_title,
+                               lyrics=lyrics_text)
+    except Exception as e:
+        print(e)
+        err = {'first': 'Connection error', 'second': ' .. try again'}
+        return render_template('index.html', error=err)
 
-        if index != -1 and index != None and index != "":
-            lyrics.getLyricsPageContent(index)
-            lyrics.getFinalLyrics() 
-            string = lyrics.lyrics
-            string = string.replace("\n" , "<br/>").replace("[" , "<hr/>[")
-            global songs
-        
-            return render_template('lyricsPage.html' ,
-                                Band=songs[lyrics.id ]['Singer'] ,
-                                Song=songs[lyrics.id ]['Song'],
-                                lyrics=string)
-    except:
-
-        err = {'first':'Connection error' , 'second':' .. try again'}
-        return render_template('index.html',error=err)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -13,7 +13,7 @@ def construct_search_url(search_string):
     return SEARCH_URL + search_string
 
 
-def search(searched_song_string):
+def search_song(searched_song_string):
     """Return SearchResult Object"""
     searched_song_string = searched_song_string.strip()
     if searched_song_string == "":
@@ -36,6 +36,15 @@ def search(searched_song_string):
         return
 
     songs_rows = result_list[0].findChildren("div", recursive=False)
+
+    if len(songs_rows) == 1:
+        # Check if there are no more
+        div = songs_rows[0]
+        if len(div.find_all("div")) == 1:
+            # No songs found
+            result = SearchResult(searched_song_string, [])
+            return result
+
     count = len(songs_rows)
     if count == 0:
         print("NO SONGS")
@@ -61,7 +70,7 @@ def search(searched_song_string):
     return result
 
 
-def get_lyrics_text_from_link(link):
+def get_lyrics_from_link(link):
     """Return SongLyrics Object"""
     request = requests.get(link)
     if request.status_code != requests.codes.ok:
