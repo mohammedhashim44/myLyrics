@@ -44,7 +44,6 @@ def get():
         lyrics_text = song_lyrics.lyrics
         lyrics_text = lyrics_text.replace("\n" , "<br/>")
         return render_template('lyricsPage.html',
-                               Band=song_lyrics.song_title,
                                Song=song_lyrics.song_title,
                                lyrics=lyrics_text)
     except Exception as e:
