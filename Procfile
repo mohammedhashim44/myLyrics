@@ -1,2 +1,2 @@
-web: python3 app/runBrowser.py
+web: python3 src/runBrowser.py
 
