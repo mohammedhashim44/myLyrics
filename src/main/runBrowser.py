@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-from app import app 
-import os 
+import os
+
+from src.main.app import app
 
 app.debug = True
 port = int(os.environ.get("PORT", 5000))

@@ -1,12 +1,6 @@
-class Song:
+class Song(dict):
     def __init__(self, song_name, singer, link):
-        self.song_name = song_name
-        self.singer = singer
-        self.link = link
-
-    def to_dict(self):
-        return {
-            "song_name": self.song_name,
-            "singer": self.singer,
-            "link": self.link
-        }
+        super().__init__()
+        self.song_name: str = song_name
+        self.singer: str = singer
+        self.link: str = link

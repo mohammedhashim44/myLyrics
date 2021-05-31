@@ -1,6 +1,5 @@
 #! /usr/bin/python3
-
-from lyrics import *
+from src.main.lyrics import *
 
 if __name__ == "__main__":
     running = True
@@ -13,7 +12,7 @@ if __name__ == "__main__":
         searched_song = searched_song.strip()
         print(">>> Connecting ...")
 
-        result = search_song_in_website(searched_song)
+        result = findSongsByNameOrNone(searched_song)
         count = len(result.songs)
         if count > 0:
             print(">> This is what we found :\n")
@@ -36,7 +35,7 @@ if __name__ == "__main__":
                 print(msg)
                 print(">>> Connecting ...")
 
-                song_lyrics = get_lyrics_from_link(song.link)
+                song_lyrics = getLyricsOrNone(song.link)
                 print(song_lyrics.lyrics)
         else:
             print(">> No songs found")

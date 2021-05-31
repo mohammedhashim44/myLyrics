@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div id="content" style="max-width: 900px;margin: 10px auto" class="w3-row-padding  ">
+    <div id="content" style="max-width: 900px;margin: 10px auto" class="w3-row-padding  ">
 
         <div class="w3-third  w3-margin-top">
 
@@ -11,7 +11,7 @@
             <div class="w3-container w3-large sub-content w3-round-large
        w3-card-4">
                 <ul class="w3-ul">
-                   
+
                     <li>
                         <span style="margin-right: 5px" class="margin">
                             <i class="w3-text-pink
@@ -19,7 +19,7 @@
 
                             </i>
                         </span> Song :
-                        <b>{{Song}}</b>
+                        <b>{{ Song }}</b>
                     </li>
 
 
@@ -34,11 +34,15 @@
        w3-container w3-large
         w3-center">
                 <p>
-                    {% print(lyrics)|safe %}
+                    {% for line in lyrics.split('\n') %}
+                        <br/>{{ line }}
+                    {% endfor %}
+
+
                 </p>
 
             </div>
         </div>
     </div>
- 
+
 {% endblock %}

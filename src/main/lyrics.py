@@ -1,9 +1,10 @@
+from typing import Optional, List
+
 import requests
 from bs4 import BeautifulSoup
 
-from models.search_result import SearchResult
-from models.song import Song
-from models.song_lyrics import SongLyrics
+from src.models.song import Song
+from src.models.song_lyrics import SongLyrics
 
 BASE_URL = "https://www.lyricsmode.com/"
 SEARCH_URL = BASE_URL + "search.php?search="
@@ -13,7 +14,7 @@ def construct_search_url(search_string):
     return SEARCH_URL + search_string
 
 
-def search_song_in_website(searched_song_string):
+def findSongsByNameOrNone(searched_song_string) -> Optional[List[Song]]:
     """Return SearchResult Object"""
     searched_song_string = searched_song_string.strip()
     if searched_song_string == "":
@@ -42,8 +43,7 @@ def search_song_in_website(searched_song_string):
         div = songs_rows[0]
         if len(div.find_all("div")) == 1:
             # No songs found
-            result = SearchResult(searched_song_string, [])
-            return result
+            return []
 
     count = len(songs_rows)
     if count == 0:
@@ -66,11 +66,11 @@ def search_song_in_website(searched_song_string):
         song = Song(name, singer, link)
         all_songs.append(song)
 
-    result = SearchResult(searched_song_string, all_songs)
-    return result
+    # result = SearchResult(searched_song_string, all_songs)
+    return all_songs
 
 
-def get_lyrics_from_link(link):
+def getLyricsOrNone(link: str) -> Optional[SongLyrics]:
     """Return SongLyrics Object"""
     request = requests.get(link)
     if request.status_code != requests.codes.ok:
