@@ -85,7 +85,9 @@ def get_song_from_link_api():
     try:
         song_lyrics = get_lyrics_from_link(link)
         lyrics = song_lyrics.lyrics
-        response = {"success": True, "lyrics": lyrics}
+        song_title = song_lyrics.song_title
+
+        response = {"success": True,"song_title":song_title, "lyrics": lyrics}
         return json.dumps(response, indent=4)
     except Exception as e:
         print(e)
